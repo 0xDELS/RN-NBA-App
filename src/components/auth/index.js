@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { RootNavigator } from './routes';
+import { StyleSheet, View, Text, Button } from 'react-native';
 
-class App extends Component {
+class AuthComponent extends Component {
     render() {
-        const Nav = RootNavigator();
         return (
             <View style={styles.container}>
-                <Nav/>
+                <Text>AuthComponent</Text>
             </View>
         );
     }
@@ -20,4 +18,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default App;
+export default AuthComponent;
