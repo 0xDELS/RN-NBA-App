@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button, Platform } from 'react-native';
 
 import Input from '../../utils/forms/input';
+import ValidationRules from '../../utils/forms/validationRules';
 
 class AuthForm extends Component{
 
@@ -73,6 +74,9 @@ class AuthForm extends Component{
         formCopy[name].value = value;
 
         /// rules
+        let rules = formCopy[name].rules;
+        let valid = ValidationRules(value, rules, formCopy);
+        formCopy[name].valid = valid
 
         this.setState({
             form: formCopy
@@ -80,7 +84,35 @@ class AuthForm extends Component{
     }
 
     submitUser = () => {
-        console.log('h1')
+        let isFormValid = true;
+        let formToSubmit = {};
+        const formCopy =  this.state.form;
+
+        for (let key in formCopy){
+            if(this.state.type === 'Login'){
+                //LOGIN
+                if(key !== 'confirmPassword'){
+                    isFormValid = isFormValid && formCopy[key].valid
+                    formToSubmit[key] = formCopy[key].value
+                }
+            } else {
+                //REGISTER
+                isFormValid = isFormValid && formCopy[key].valid
+                formToSubmit[key] = formCopy[key].value
+            }   
+        }
+
+        if(isFormValid){
+            if(this.state.type === 'Login'){
+                console.log(formToSubmit)
+            } else {
+                console.log(formToSubmit)
+            }
+        }else{
+            this.setState({
+                hasErrors:true
+            })
+        }
     }
 
     changeFormType = () => {
