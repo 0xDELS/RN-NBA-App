@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, ScrollView, ActivityIndicator } from 'react-native';
 
 import AuthLogo from './authLogo';
+import AuthForm from './authForm';
 
 class AuthComponent extends Component {
 
     state = {
         loading: false
+    }
+
+    goNext = () => {
+        this.props.navigation.navigate('App')
     }
 
     render() {
@@ -21,6 +26,7 @@ class AuthComponent extends Component {
                 <ScrollView style={styles.container}>
                     <View>
                         <AuthLogo/>
+                        <AuthForm goNext={this.goNext}/>
                     </View>
                 </ScrollView>
             )
