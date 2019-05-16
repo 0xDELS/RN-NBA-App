@@ -3,24 +3,56 @@ import {
     SIGN_UP
 } from '../types';
 
+import { SIGNUP, SIGNIN, FIREBASEURL  } from '../../utils/firebase/config';
+
 import axios from 'axios';
 
-export function signIn(){
+export function signIn(data){
+
+    const request = axios({
+        method:'POST',
+        url: SIGNIN,
+        data:{
+            email: data.email,
+            password: data.password,
+            returnSecureToken: true
+        },
+        headers:{
+            "Content-type":"application/json"
+        }
+    }).then( response => {
+        return response.data
+    }).catch(e => {
+        return false
+    });
+
     return {
         type:SIGN_IN,
-        payload:{
-            email:'francis@gmail.com',
-            token:'jdkashdjksandiubdjqwkdasda'
-        }
+        payload:request
     }
 }
 
-export function signUp(){
+export function signUp(data){
+
+    const request = axios({
+        method:'POST',
+        url: SIGNUP,
+        data:{
+            email: data.email,
+            password: data.password,
+            returnSecureToken: true
+        },
+        headers:{
+            "Content-type":"application/json"
+        }
+    }).then( response => {
+        return response.data
+    }).catch(e => {
+        return false
+    });
+
     return {
         type:SIGN_UP,
-        payload:{
-            email:'francis@gmail.com',
-            token:'jdkashdjksandiubdjqwkdasda'
-        }
+        payload:request
     }
 }
