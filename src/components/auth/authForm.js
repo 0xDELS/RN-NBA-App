@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import { signUp, signIn} from '../../store/actions/userActions';
 import { bindActionCreators } from 'redux';
 
+import { setTokens } from '../../utils/firebase/config';
+
 class AuthForm extends Component{
 
     state = {
@@ -87,6 +89,17 @@ class AuthForm extends Component{
         })
     }
 
+    manageAcess = () => {
+        if(!this.props.User.auth.userID){
+            this.setState({hasErrors:true})
+        }else{
+            setTokens(this.props.User.auth, () => {
+                this.setState({hasErrors:false})
+                this.props.goNext()
+            })
+        }
+    }
+
     submitUser = () => {
         let isFormValid = true;
         let formToSubmit = {};
@@ -108,9 +121,13 @@ class AuthForm extends Component{
 
         if(isFormValid){
             if(this.state.type === 'Login'){
-                this.props.signIn(formToSubmit)
+                this.props.signIn(formToSubmit).then(() => {
+                    this.manageAcess()
+                })
             } else {
-                this.props.signUp(formToSubmit)
+                this.props.signUp(formToSubmit).then(() => {
+                    this.manageAcess()
+                })
             }
         }else{
             this.setState({

@@ -9,7 +9,7 @@ export default function(state={}, action){
             return {
                 ...state, 
                 auth:{
-                    localID: action.payload.localId || false,
+                    userID: action.payload.localId || false,
                     token: action.payload.idToken || false,
                     refreshToken: action.payload.refreshToken || false
                 }
@@ -18,7 +18,7 @@ export default function(state={}, action){
             return {
                 ...state, 
                 auth:{
-                    localID: action.payload.localId || false,
+                    userID: action.payload.localId || false,
                     token: action.payload.idToken || false,
                     refreshToken: action.payload.refreshToken || false
                 }

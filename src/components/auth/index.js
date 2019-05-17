@@ -4,6 +4,8 @@ import { StyleSheet, View, Text, ScrollView, ActivityIndicator } from 'react-nat
 import AuthLogo from './authLogo';
 import AuthForm from './authForm';
 
+import { getTokens, setTokens } from '../../utils/firebase/config';
+
 class AuthComponent extends Component {
 
     state = {
@@ -12,6 +14,12 @@ class AuthComponent extends Component {
 
     goNext = () => {
         this.props.navigation.navigate('App')
+    }
+
+    componentDidMount(){
+        getTokens((value) => {
+            console.log(value)
+        })
     }
 
     render() {
