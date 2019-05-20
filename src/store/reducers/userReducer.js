@@ -1,6 +1,7 @@
 import {
     SIGN_IN,
-    SIGN_UP
+    SIGN_UP,
+    AUTO_SIGN_IN
 } from '../types';
 
 export default function(state={}, action){
@@ -14,6 +15,7 @@ export default function(state={}, action){
                     refreshToken: action.payload.refreshToken || false
                 }
             };
+            break;
         case SIGN_UP:
             return {
                 ...state, 
@@ -21,6 +23,16 @@ export default function(state={}, action){
                     userID: action.payload.localId || false,
                     token: action.payload.idToken || false,
                     refreshToken: action.payload.refreshToken || false
+                }
+            };
+            break;
+        case AUTO_SIGN_IN:
+            return {
+                ...state, 
+                auth:{
+                    userID: action.payload.user_id || false,
+                    token: action.payload.id_token || false,
+                    refreshToken: action.payload.refresh_token || false
                 }
             };
         default:

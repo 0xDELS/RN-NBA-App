@@ -1,9 +1,10 @@
 import {
     SIGN_IN,
-    SIGN_UP
+    SIGN_UP,
+    AUTO_SIGN_IN
 } from '../types';
 
-import { SIGNUP, SIGNIN, FIREBASEURL  } from '../../utils/firebase/config';
+import { SIGNUP, SIGNIN, FIREBASEURL, REFRESH  } from '../../utils/firebase/config';
 
 import axios from 'axios';
 
@@ -54,5 +55,26 @@ export function signUp(data){
     return {
         type:SIGN_UP,
         payload:request
+    }
+}
+
+export const autoSignIn = (refToken) => {
+
+    const request = axios({
+        method: 'POST',
+        url: REFRESH,
+        data: 'grant_type=refresh_token&refresh_token=' + refToken,
+        headers:{
+            "Content-type":"application/x-www-form-urlencoded"
+        }
+    }).then( response => {
+        return response.data
+    }).catch(e => {
+        return false
+    });
+    
+    return{
+        type: AUTO_SIGN_IN,
+        payload: request
     }
 }
