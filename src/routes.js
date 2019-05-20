@@ -1,5 +1,6 @@
 import React from 'react';
 import { Platform } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { createStackNavigator, createBottomTabNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation';
 
@@ -48,6 +49,31 @@ const AppStack = createBottomTabNavigator({
     Games:{
         screen: GamesStack
     }
+},{
+    tabBarOptions:{
+        activeTintColor:'#fff',
+        showLabel:false,
+        activeBackgroundColor:'#00194b',
+        inactiveBackgroundColor:'#001338',
+        style:{
+            backgroundColor:'#001338'
+        }
+    },
+    initialRouteName: 'News',
+    defaultNavigationOptions:({navigation}) => ({
+        tabBarIcon:({focused, horizontal, tintColor}) => {
+            const { routeName } = navigation.state;
+            let iconName;
+
+            if (routeName === 'News') {
+                iconName= `ios-basketball`
+            }else if(routeName === 'Games'){
+                iconName = `md-tv`
+            }
+
+            return <Ionicons name={iconName} size={25} color={tintColor} />
+        }
+    })
 });
 
 const AuthStack = createStackNavigator({
