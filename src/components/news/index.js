@@ -69,9 +69,10 @@ const styles = StyleSheet.create({
         borderColor:'#dddddd'
     },
     titleCard:{
+        fontFamily: 'Roboto-Bold',
         color: '#232323',
         fontSize: 16,
-        padding: 10
+        padding: 10,
     },
     bottomCard:{
         flex: 1,
@@ -81,10 +82,12 @@ const styles = StyleSheet.create({
         padding: 10
     },
     bottomCardTeam:{
+        fontFamily: 'Roboto-Bold',
         color: '#828282',
         fontSize: 12
     },
     bottomCardDate:{
+        fontFamily: 'Roboto-Light',
         color: '#828282',
         fontSize: 12
     }
